@@ -1,0 +1,1 @@
+zoxide.el is inspired by [[https://github.com/priyadarshan/emacs-fasd][fasd.el]] and aims to be an alternative to [[https://github.com/priyadarshan/emacs-fasd][fasd.el]]. There are some other repos which has the same name, but this repo is written by myself for my personal use.
