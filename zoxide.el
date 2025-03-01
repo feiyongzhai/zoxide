@@ -74,7 +74,7 @@
   (let* ((zoxide (concat "zoxide query " args))
 	 (zoxide-result (shell-command-to-string zoxide))
 	 (path (replace-regexp-in-string "\n$" "" zoxide-result)))
-    (and *is-windows*
+    (and (or (eq system-type 'ms-dos) (eq system-type 'windows-nt))
 	 ;; 因为 windows 下有的时候可以正确解释为 utf-8 ，有的时候不可以，为 gbk
 	 ;; 思路：为 gbk 编码的时候，转换成 utf-8，为 utf-8 则不操作
 	 (text-property-any 0 (1- (length path)) 'charset 'chinese-gbk path)
@@ -84,6 +84,9 @@
 	(eshell/cd "-")
       (eshell/cd path)
       ;; (eshell/echo path)
+      ;; https://emacs.stackexchange.com/questions/13698/eshell-print-only-works-when-called-from-eshell
+      (eshell-commands (eshell-print "\neshell cd here!")) ;这是一个提醒：我希望我做了目录切换之后有一个提醒
+
       )))
 
 (provide 'zoxide)
